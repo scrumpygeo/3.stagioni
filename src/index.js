@@ -7,15 +7,13 @@ class App extends React.Component {
 
     // initialize state object as null; = only time we do direct assignment of state
     this.state = { lat: null, errorMessage: "" };
+  }
 
+  componentDidMount() {
     // place this here, not in render() so only gets called once.
     window.navigator.geolocation.getCurrentPosition(
-      position => {
-        this.setState({ lat: position.coords.latitude });
-      }, // success callback
-      err => {
-        this.setState({ errorMessage: err.message });
-      }
+      position => this.setState({ lat: position.coords.latitude }),
+      err => this.setState({ errorMessage: err.message })
     );
   }
 
